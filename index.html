@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OB Exam Study Pack – 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d0f14;
+    --surface: #13161e;
+    --surface2: #1a1e2a;
+    --border: #252a38;
+    --accent: #e8c84a;
+    --accent2: #4af0c4;
+    --accent3: #f06a6a;
+    --text: #e8eaf0;
+    --text-muted: #8892a4;
+    --text-dim: #545f75;
+    --star: #e8c84a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(13,15,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+    height: 52px;
+  }
+  nav a {
+    color: var(--text-muted); text-decoration: none; font-size: 13px;
+    font-weight: 500; letter-spacing: .03em; transition: color .2s;
+  }
+  nav a:hover { color: var(--accent); }
+  nav .logo { color: var(--accent); font-family: 'Playfair Display', serif; font-size: 17px; margin-right: auto; }
+
+  /* HERO */
+  .hero {
+    padding: 120px 2rem 60px;
+    text-align: center;
+    background: radial-gradient(ellipse 70% 50% at 50% 0%, rgba(232,200,74,0.08) 0%, transparent 70%);
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900;
+    color: var(--text);
+    letter-spacing: -.02em;
+    line-height: 1.15;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero p { color: var(--text-muted); font-size: 16px; margin-top: 12px; max-width: 580px; margin-inline: auto; }
+  .badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(232,200,74,0.12); border: 1px solid rgba(232,200,74,0.3); color: var(--accent); font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; padding: 4px 12px; border-radius: 99px; margin-bottom: 20px; }
+
+  /* TABS */
+  .tabs {
+    display: flex; gap: 8px; padding: 0 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky; top: 52px; z-index: 90;
+    overflow-x: auto;
+  }
+  .tab-btn {
+    padding: 14px 20px; font-size: 13px; font-weight: 600;
+    letter-spacing: .04em; text-transform: uppercase;
+    background: none; border: none; color: var(--text-muted);
+    cursor: pointer; border-bottom: 2px solid transparent;
+    transition: all .2s; white-space: nowrap;
+  }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn:hover:not(.active) { color: var(--text); }
+
+  /* MAIN CONTENT */
+  .main { max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem 5rem; }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* SECTIONS */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 16px 22px;
+    display: flex; align-items: center; gap: 12px;
+    cursor: pointer;
+    user-select: none;
+    border-bottom: 1px solid var(--border);
+    transition: background .2s;
+  }
+  .section-header:hover { background: var(--surface2); }
+  .section-number {
+    width: 28px; height: 28px; border-radius: 6px;
+    background: var(--accent); color: #000;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .section-title { font-size: 15px; font-weight: 600; flex: 1; }
+  .section-stars { color: var(--star); font-size: 13px; }
+  .chevron { color: var(--text-dim); font-size: 12px; transition: transform .25s; }
+  .section-header.open .chevron { transform: rotate(90deg); }
+  .section-body { padding: 22px; display: none; }
+  .section-body.open { display: block; }
+
+  /* CONTENT ELEMENTS */
+  h3 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--accent); margin-bottom: 12px; margin-top: 20px; }
+  h3:first-child { margin-top: 0; }
+  h4 { font-size: 14px; font-weight: 600; color: var(--accent2); margin-top: 16px; margin-bottom: 8px; text-transform: uppercase; letter-spacing: .06em; }
+  p { color: var(--text-muted); margin-bottom: 10px; }
+  ul, ol { padding-left: 20px; color: var(--text-muted); margin-bottom: 10px; }
+  li { margin-bottom: 5px; }
+  strong { color: var(--text); font-weight: 600; }
+  em { color: var(--accent2); font-style: normal; font-weight: 500; }
+
+  /* KEYWORD */
+  .kw {
+    background: rgba(74,240,196,0.1);
+    border: 1px solid rgba(74,240,196,0.25);
+    color: var(--accent2);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    display: inline-block;
+  }
+
+  /* DEFINITION BOX */
+  .def-box {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 10px 0;
+  }
+  .def-box .def-term { color: var(--accent); font-weight: 700; font-size: 14px; }
+  .def-box p { margin: 4px 0 0; font-size: 14px; }
+
+  /* COMPARE TABLE */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin: 14px 0; }
+  .compare-table th {
+    background: rgba(232,200,74,0.12);
+    color: var(--accent); font-weight: 600;
+    padding: 10px 14px; text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+  .compare-table td {
+    padding: 9px 14px; border-bottom: 1px solid var(--border);
+    color: var(--text-muted); vertical-align: top;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .compare-table tr:hover td { background: rgba(255,255,255,0.02); }
+
+  /* EXAMPLE BOX */
+  .example {
+    background: rgba(74,240,196,0.05);
+    border: 1px dashed rgba(74,240,196,0.25);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 10px 0;
+    font-size: 13.5px;
+  }
+  .example::before {
+    content: '📌 Example: ';
+    color: var(--accent2);
+    font-weight: 600;
+  }
+
+  /* WARN / TIP */
+  .tip {
+    background: rgba(232,200,74,0.07);
+    border: 1px solid rgba(232,200,74,0.2);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin: 10px 0;
+    font-size: 13.5px;
+    color: #c8aa3a;
+  }
+  .tip::before { content: '⭐ Exam Tip: '; font-weight: 700; }
+
+  /* NUMBERED STAGES */
+  .stages { counter-reset: stage; list-style: none; padding: 0; }
+  .stages li {
+    counter-increment: stage;
+    display: flex; gap: 14px; align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .stages li:last-child { border-bottom: none; }
+  .stages li::before {
+    content: counter(stage);
+    width: 26px; height: 26px;
+    background: var(--surface2);
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700; flex-shrink: 0;
+  }
+  .stage-name { color: var(--text); font-weight: 600; }
+
+  /* PILL GRID */
+  .pill-grid { display: flex; flex-wrap: wrap; gap: 8px; margin: 10px 0; }
+  .pill {
+    padding: 5px 14px; border-radius: 99px; font-size: 13px; font-weight: 500;
+    border: 1px solid var(--border);
+  }
+  .pill-green { background: rgba(74,240,196,0.08); border-color: rgba(74,240,196,0.3); color: var(--accent2); }
+  .pill-red { background: rgba(240,106,106,0.08); border-color: rgba(240,106,106,0.3); color: var(--accent3); }
+  .pill-yellow { background: rgba(232,200,74,0.08); border-color: rgba(232,200,74,0.3); color: var(--accent); }
+
+  /* MODEL PAPER STYLES */
+  .paper-header {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .paper-header h2 { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--text); }
+  .paper-header p { color: var(--text-muted); font-size: 13.5px; margin: 4px 0; }
+  .paper-header .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+  .paper-meta { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; margin-top: 12px; }
+  .paper-meta span { font-size: 13px; color: var(--text-muted); }
+  .paper-meta strong { color: var(--accent); }
+
+  .question-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .question-head {
+    background: rgba(232,200,74,0.08);
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .question-head h3 { color: var(--accent); font-family: 'IBM Plex Sans', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; margin: 0; }
+  .q-marks { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--text-dim); }
+  .question-parts { padding: 18px 22px; }
+  .q-part {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 14px;
+  }
+  .q-part:last-child { border-bottom: none; padding-bottom: 0; }
+  .q-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px; font-weight: 600;
+    color: var(--accent2);
+    min-width: 28px;
+  }
+  .q-text { flex: 1; font-size: 14px; color: var(--text-muted); }
+  .q-marks-inline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px; color: var(--text-dim);
+    align-self: flex-start; margin-top: 2px;
+    white-space: nowrap;
+  }
+  .scenario {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent3);
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: var(--text-muted);
+  }
+  .scenario strong { color: var(--accent3); display: block; margin-bottom: 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .06em; }
+  .instructions {
+    background: rgba(240,106,106,0.06);
+    border: 1px solid rgba(240,106,106,0.2);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    font-size: 13.5px;
+    color: var(--text-muted);
+  }
+  .instructions h4 { color: var(--accent3); margin-bottom: 8px; font-size: 13px; text-transform: uppercase; letter-spacing: .06em; margin-top: 0; }
+  .instructions ul { margin: 0; }
+
+  /* ANSWER SECTION */
+  .ans-toggle {
+    width: 100%; padding: 10px 22px;
+    background: var(--surface2);
+    border: none; border-top: 1px solid var(--border);
+    color: var(--text-muted); font-size: 13px; font-weight: 600;
+    cursor: pointer; text-align: left;
+    display: flex; align-items: center; gap: 8px;
+    transition: background .2s;
+  }
+  .ans-toggle:hover { background: rgba(74,240,196,0.05); color: var(--accent2); }
+  .ans-body {
+    display: none;
+    padding: 18px 22px;
+    background: rgba(74,240,196,0.03);
+    border-top: 1px solid rgba(74,240,196,0.1);
+  }
+  .ans-body.open { display: block; }
+  .ans-part { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .ans-part:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .ans-label { font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--accent2); font-weight: 600; margin-bottom: 6px; }
+  .ans-text { font-size: 13.5px; color: var(--text-muted); }
+  .ans-text ul, .ans-text ol { font-size: 13.5px; }
+
+  /* QUICK REFERENCE */
+  .quick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .quick-grid { grid-template-columns: 1fr; } }
+  .quick-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .quick-card h4 { color: var(--accent); margin-top: 0; font-size: 13px; }
+  .quick-card ul { font-size: 13px; margin: 0; }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo">OB 2026</span>
+  <a href="#" onclick="showTab('notes')">Study Notes</a>
+  <a href="#" onclick="showTab('paper')">Model Paper</a>
+  <a href="#" onclick="showTab('quick')">Quick Ref</a>
+</nav>
+
+<div class="hero">
+  <div class="badge">📚 Organizational Behavior · Exam Prep</div>
+  <h1>Complete Study Pack<br><span>for OB Exam 2026</span></h1>
+  <p>Master notes, examples, and a full model paper — built from the lecturer's evaluation list and 3 years of past papers.</p>
+</div>
+
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('notes')">📖 Master Notes</button>
+  <button class="tab-btn" onclick="showTab('paper')">📝 Model Paper 2026</button>
+  <button class="tab-btn" onclick="showTab('quick')">⚡ Quick Reference</button>
+</div>
+
+<!-- ===================== NOTES TAB ===================== -->
+<div class="main">
+<div id="tab-notes" class="tab-panel active">
+
+  <!-- SECTION 1: PERSONALITY -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">1</div>
+      <div class="section-title">Personality in the Workplace — Big Five Model</div>
+      <div class="section-stars">⭐⭐⭐ Most Tested</div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="section-body">
+      <h3>What is Personality?</h3>
+      <p>The <strong>sum total of ways in which an individual reacts and interacts with others</strong> — the measurable traits a person consistently exhibits across situations.</p>
+      <div class="tip">Past papers (2022, 2023, 2024) ALL asked about personality models. You MUST know the Big Five cold — definitions, workplace predictions, and UI design applications.</div>
+
+      <h3>The Big Five Personality Model (OCEAN)</h3>
+      <p>The most research-backed model for predicting work behavior. Each trait exists on a spectrum from low to high.</p>
+
+      <div class="def-box">
+        <div class="def-term">O — Openness to Experience</div>
+        <p><strong>High:</strong> Creative, curious, imaginative, artistically sensitive, willing to try new things.<br>
+        <strong>Work Prediction:</strong> Strong leaders, good for innovation roles, adaptable to change.<br>
+        <strong>Low:</strong> Prefers routine, conventional, resistant to change.</p>
+      </div>
+      <div class="example">A software architect who constantly proposes new frameworks and encourages the team to experiment with emerging tech — high Openness.</div>
+
+      <div class="def-box">
+        <div class="def-term">C — Conscientiousness</div>
+        <p><strong>High:</strong> Responsible, dependable, organized, thorough, persistent.<br>
+        <strong>Work Prediction:</strong> <em>Strongest single predictor of job performance</em> across all occupations. Develops more job knowledge and exerts greater effort.<br>
+        <strong>Low:</strong> Disorganized, unreliable, easily distracted.</p>
+      </div>
+      <div class="example">A QA engineer who meticulously documents every test case, never misses a deadline, and always double-checks their work — high Conscientiousness.</div>
+
+      <div class="def-box">
+        <div class="def-term">E — Extraversion</div>
+        <p><strong>High:</strong> Sociable, assertive, energetic, talkative, gregarious.<br>
+        <strong>Work Prediction:</strong> Suited for sales, management, leadership roles. Tends to be happier at work and has strong social skills.<br>
+        <strong>Low (Introversion):</strong> Reserved, quiet, works well independently.</p>
+      </div>
+      <div class="example">A sales rep who thrives at client meetings and energizes the room during presentations — high Extraversion.</div>
+
+      <div class="def-box">
+        <div class="def-term">A — Agreeableness</div>
+        <p><strong>High:</strong> Good-natured, cooperative, trusting, empathetic, accommodating.<br>
+        <strong>Work Prediction:</strong> Excellent for teams and customer-facing roles. Avoids conflict, easy to collaborate with.<br>
+        <strong>Low:</strong> Suspicious, uncooperative, difficult to work with.</p>
+      </div>
+      <div class="example">A help desk agent who patiently resolves angry customer complaints without escalating — high Agreeableness.</div>
+
+      <div class="def-box">
+        <div class="def-term">N — Emotional Stability (vs. Neuroticism)</div>
+        <p><strong>High (Stable):</strong> Calm, self-confident, secure under stress, resilient.<br>
+        <strong>Work Prediction:</strong> Related to higher job satisfaction and lower stress. Handles pressure well.<br>
+        <strong>Low (Neurotic):</strong> Anxious, moody, insecure, emotionally reactive.</p>
+      </div>
+      <div class="example">A project manager who stays composed when a deployment fails at midnight and calmly coordinates the fix — high Emotional Stability.</div>
+
+      <h3>Designing a Personality Assessment Tool (Exam Favorite)</h3>
+      <p>The 2023 paper explicitly asked to "describe the functional design of a personality assessment tool." Here's a complete answer framework:</p>
+      <ol>
+        <li><strong>Define Objective:</strong> Identify which traits to measure (e.g., Conscientiousness + Openness for an IT developer role).</li>
+        <li><strong>Design Questionnaire:</strong> Create Likert-scale items (1–5, Strongly Disagree to Strongly Agree) for each trait. E.g., "I complete tasks before their deadline" → Conscientiousness.</li>
+        <li><strong>Validation:</strong> Test the questions with a sample group to ensure reliability.</li>
+        <li><strong>Scoring & Profiling:</strong> Calculate average scores per dimension and generate a personality profile radar chart.</li>
+        <li><strong>Output Report:</strong> Map scores to job requirements and provide fit analysis.</li>
+      </ol>
+
+      <h3>Myers-Briggs Type Indicator (MBTI)</h3>
+      <p>Classifies people on 4 axes → 16 personality types (e.g., ENTJ — Extroverted, Intuitive, Thinking, Judging).</p>
+      <table class="compare-table">
+        <tr><th>Axis</th><th>Poles</th></tr>
+        <tr><td>Energy</td><td>Extroverted (E) ↔ Introverted (I)</td></tr>
+        <tr><td>Information</td><td>Sensing (S) ↔ Intuitive (N)</td></tr>
+        <tr><td>Decisions</td><td>Thinking (T) ↔ Feeling (F)</td></tr>
+        <tr><td>Structure</td><td>Judging (J) ↔ Perceiving (P)</td></tr>
+      </table>
+      <div class="tip">MBTI = good for self-awareness & counseling. BAD for job selection (limited validity). Big Five = better predictor of performance.</div>
+
+      <h3>How Personality Affects Teams (2024 Q1d)</h3>
+      <ul>
+        <li><strong>Conscientiousness:</strong> High-C members meet deadlines consistently → improves team performance. Low-C members create bottlenecks → causes friction.</li>
+        <li><strong>Agreeableness:</strong> High-A members facilitate open communication → better collaboration. Low-A causes interpersonal conflicts in team meetings.</li>
+        <li><strong>Extraversion:</strong> High-E individuals naturally take leadership in discussions; may overshadow introverted teammates in decision-making sessions.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 2: PERCEPTION & ATTRIBUTION -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">2</div>
+      <div class="section-title">Perception & Attribution Theory</div>
+      <div class="section-stars">⭐⭐⭐ Extremely High Frequency</div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="section-body">
+      <h3>What is Perception?</h3>
+      <div class="def-box">
+        <div class="def-term">Perception</div>
+        <p>A process by which individuals <strong>organize and interpret their sensory impressions</strong> in order to give meaning to their environment. People act based on their <em>perception of reality</em>, not reality itself.</p>
+      </div>
+
+      <h3>Perceptual Biases & Shortcuts (All 6 Required)</h3>
+
+      <div class="def-box">
+        <div class="def-term">1. Selective Perception</div>
+        <p>Interpreting what you see based on your own <strong>interests, background, experience, and attitudes</strong> — filtering out information that contradicts your existing views.</p>
+      </div>
+      <div class="example">A manager who believes remote workers are unproductive notices every time a remote employee misses a message, but ignores their strong output metrics — only seeing what confirms the existing belief.</div>
+
+      <div class="def-box">
+        <div class="def-term">2. Halo Effect</div>
+        <p>Drawing a <strong>general impression about a person based on a SINGLE positive characteristic</strong> — assuming everything about them is good.</p>
+      </div>
+      <div class="example">An interviewer discovers that a candidate graduated from a prestigious university. They then rate the candidate highly on leadership, communication, and technical skills — even before testing those qualities.</div>
+
+      <div class="def-box">
+        <div class="def-term">3. Horn Effect (Opposite of Halo)</div>
+        <p>Drawing a <strong>general negative impression based on a single negative characteristic</strong>.</p>
+      </div>
+      <div class="example">A manager sees an employee arrive late once and begins assuming the employee is lazy, unreliable, and not a team player — even though their work quality is excellent.</div>
+
+      <div class="def-box">
+        <div class="def-term">4. Contrast Effect</div>
+        <p>Evaluating a person by <strong>comparing them to others recently encountered</strong> rather than against an absolute standard.</p>
+      </div>
+      <div class="example">In a day of interviews, the third candidate gives average answers. But because the first two candidates were exceptionally poor, the third seems outstanding. The contrast distorts the evaluation.</div>
+
+      <div class="def-box">
+        <div class="def-term">5. Stereotyping</div>
+        <p>Judging someone based on the <strong>perception of the group to which they belong</strong>, rather than their individual qualities.</p>
+      </div>
+      <div class="example">Assuming that a 55-year-old employee will struggle to learn a new software system, simply because of age — without actually testing their ability.</div>
+
+      <div class="def-box">
+        <div class="def-term">6. Recency Effect</div>
+        <p>Giving <strong>disproportionate weight to the most recent events</strong> or information when making a judgment, ignoring the longer historical pattern.</p>
+      </div>
+      <div class="example">An employee who performed excellently all year gets a poor annual review because they made one mistake in the week before the evaluation.</div>
+
+      <h3>Attribution Theory</h3>
+      <p>Attribution theory explains how we <strong>determine whether someone's behavior is caused by internal factors (their fault) or external factors (the situation's fault)</strong>.</p>
+      <table class="compare-table">
+        <tr><th>Determinant</th><th>Question</th><th>High → External / Low → Internal</th></tr>
+        <tr>
+          <td><strong>Distinctiveness</strong></td>
+          <td>Does the person behave differently in different situations?</td>
+          <td>High distinctiveness → External cause. Low → Internal cause.</td>
+        </tr>
+        <tr>
+          <td><strong>Consensus</strong></td>
+          <td>Do others respond the same way to the same situation?</td>
+          <td>High consensus → External cause. Low → Internal cause.</td>
+        </tr>
+        <tr>
+          <td><strong>Consistency</strong></td>
+          <td>Does the person respond the same way over time?</td>
+          <td>High consistency → Internal cause. Low → External cause.</td>
+        </tr>
+      </table>
+      <div class="example">A developer Rahul misses a deadline. <br>• <em>Distinctiveness HIGH</em> (he's never late on other tasks) → External<br>• <em>Consensus HIGH</em> (the whole team missed the same deadline) → External<br>• <em>Consistency LOW</em> (he's rarely late) → External<br>Conclusion: The missed deadline was likely caused by external factors (unclear requirements, blocked dependencies), NOT Rahul's laziness.</div>
+
+      <h3>Attribution Errors</h3>
+      <div class="def-box">
+        <div class="def-term">Fundamental Attribution Error</div>
+        <p>The tendency to <strong>underestimate external factors and overestimate internal factors</strong> when judging others' behavior. We blame the person, not the situation.</p>
+      </div>
+      <div class="example">When a colleague delivers a poor presentation, we think "they're just not competent" rather than considering that the projector broke, they had 24 hours to prepare, and the audience was hostile.</div>
+
+      <div class="def-box">
+        <div class="def-term">Self-Serving Bias</div>
+        <p>Attributing your own <strong>successes to internal factors</strong> (skill, effort) and your own <strong>failures to external factors</strong> (bad luck, unfair conditions).</p>
+      </div>
+      <div class="example">A developer who ships a successful feature says "I wrote clean, well-tested code." The same developer whose feature causes a bug says "The requirements were unclear and the legacy codebase is a mess."</div>
+
+      <h3>Attribution Theory in Team Settings (2024 Q2b)</h3>
+      <p>Perceptual errors lead to misjudgments about team member performance:</p>
+      <ul>
+        <li>A manager commits <strong>Fundamental Attribution Error</strong> → blames a developer for slow delivery, without recognizing the DevOps pipeline was broken (external). Result: unfair performance review, damaged trust.</li>
+        <li><strong>Self-Serving Bias</strong> in a team lead → takes credit for a project's success but blames the team for failures → destroys team morale and motivation.</li>
+        <li><strong>Stereotyping</strong> → senior team member assumes a fresh graduate can't handle complex architecture tasks → junior never gets growth opportunities → team loses potential talent.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: MOTIVATION -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">3</div>
+      <div class="section-title">Motivation Theories — Herzberg & Equity</div>
+      <div class="section-stars">⭐⭐⭐ #1 Most Asked Topic</div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="section-body">
+      <h3>Herzberg's Two-Factor Theory</h3>
+      <p>Herzberg found that <strong>satisfaction and dissatisfaction are NOT opposites — they are two separate dimensions</strong>. Removing dissatisfaction does not create satisfaction.</p>
+      <table class="compare-table">
+        <tr><th>Hygiene Factors (Extrinsic)</th><th>Motivators (Intrinsic)</th></tr>
+        <tr><td><em>Absence causes dissatisfaction; Presence prevents it — but does NOT motivate</em></td><td><em>Presence creates genuine satisfaction and motivation</em></td></tr>
+        <tr><td>Salary / Pay</td><td>Achievement</td></tr>
+        <tr><td>Company Policies</td><td>Recognition</td></tr>
+        <tr><td>Physical Working Conditions</td><td>Responsibility</td></tr>
+        <tr><td>Job Security</td><td>Personal Growth / Advancement</td></tr>
+        <tr><td>Relationship with supervisor</td><td>The Work Itself</td></tr>
+        <tr><td>Interpersonal relationships</td><td>Promotion Opportunities</td></tr>
+      </table>
+      <div class="tip">If a scenario says "employees are not leaving but are not productive" → Hygiene factors are met, but Motivators are absent. If "employees are quitting despite good salaries" → Hygiene is present but Motivators are absent. Both are different problems with different solutions!</div>
+
+      <h3>Applying Two-Factor Theory (2024 Q3a Scenario Type)</h3>
+      <p>When analyzing a workplace scenario through Herzberg:</p>
+      <ol>
+        <li>Identify complaints about <em>work conditions, pay, policies</em> → These are <strong>hygiene issues</strong>. Fix them to remove dissatisfaction.</li>
+        <li>Identify lack of <em>recognition, no growth path, boring work</em> → These are <strong>motivator deficits</strong>. Add responsibility, growth, and recognition to truly motivate.</li>
+        <li>Understand that giving a salary raise to an unmotivated employee <strong>will not increase motivation</strong> — only fixes hygiene.</li>
+      </ol>
+      <div class="example">At a tech company, developers receive competitive salaries and have a comfortable workspace (hygiene factors met — no dissatisfaction). However, they still seem disengaged. Reason: they have no autonomy, no recognition for good work, and no path for promotion (motivators absent). Solution: introduce code ownership, public recognition programs, and a clear career ladder.</div>
+
+      <h3>Retaining New Generation Employees (2024 Q3b)</h3>
+      <p>Based on Herzberg, key retention factors for Gen-Z/Millennial employees:</p>
+      <ol>
+        <li><strong>Meaningful Work</strong> — they want to work on things that matter (Motivator: work itself).</li>
+        <li><strong>Continuous Learning & Growth</strong> — regular skill development opportunities (Motivator: personal growth).</li>
+        <li><strong>Recognition & Feedback</strong> — frequent acknowledgment of contributions, not just annual reviews (Motivator: recognition).</li>
+        <li><strong>Competitive & Fair Compensation</strong> — salary and benefits that match market rate (Hygiene: salary — must not cause dissatisfaction).</li>
+        <li><strong>Autonomy & Responsibility</strong> — freedom to own projects and make decisions (Motivator: responsibility).</li>
+      </ol>
+
+      <h3>Adams' Equity Theory</h3>
+      <div class="def-box">
+        <div class="def-term">Core Idea</div>
+        <p>Employees compare their <strong>Outcome/Input ratio</strong> to a reference person. If they perceive it as unfair, <em>tension arises</em> and they act to restore equity.</p>
+      </div>
+      <div class="def-box">
+        <div class="def-term">Formula</div>
+        <p>My Outcomes / My Inputs &nbsp;vs.&nbsp; Other's Outcomes / Other's Inputs</p>
+      </div>
+
+      <h4>Responses to Perceived Inequity</h4>
+      <ul>
+        <li><strong>Reduce Inputs:</strong> Work less hard (slack off) to balance the equation.</li>
+        <li><strong>Demand More Outcomes:</strong> Ask for a pay raise or better benefits.</li>
+        <li><strong>Distort Perceptions:</strong> Rationalize that the other person works harder than initially thought.</li>
+        <li><strong>Change Referent:</strong> Compare themselves to a different, more similar colleague.</li>
+        <li><strong>Leave the Organization:</strong> Quit, transfer, or become absent frequently.</li>
+      </ul>
+
+      <div class="example">Kavya and Rohan joined the company together, have the same skills and workload. Kavya discovers Rohan earns 20% more. She perceives inequity. She begins submitting work late, avoids extra responsibilities, and is actively looking for another job — classic equity theory responses.</div>
+
+      <h4>Strategies to Restore Equity (2024 Q3c)</h4>
+      <ol>
+        <li><strong>Transparent pay structures</strong> — clearly communicate salary bands and pay criteria.</li>
+        <li><strong>Objective performance metrics</strong> — tie rewards to measurable outcomes, not favoritism.</li>
+        <li><strong>Regular salary reviews</strong> — ensure pay stays market-competitive for all employees equally.</li>
+        <li><strong>Open-door policy</strong> — allow employees to raise equity concerns directly with HR.</li>
+      </ol>
+
+      <h3>Organizational Justice (Extension of Equity Theory)</h3>
+      <table class="compare-table">
+        <tr><th>Type</th><th>Meaning</th><th>Example</th></tr>
+        <tr><td><strong>Distributive Justice</strong></td><td>Fairness of outcomes distributed</td><td>Equal pay for equal work</td></tr>
+        <tr><td><strong>Procedural Justice</strong></td><td>Fairness of the process used to reach the outcome</td><td>Transparent promotion criteria</td></tr>
+        <tr><td><strong>Interactional Justice</strong></td><td>Being treated with dignity and respect during processes</td><td>Manager explains a rejection respectfully</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- SECTION 4: EMOTIONS & EI -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">4</div>
+      <div class="section-title">Emotions, Moods & Emotional Intelligence</div>
+      <div class="section-stars">⭐⭐⭐ Every Year</div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="section-body">
+      <h3>Emotions vs. Moods — Key Differences</h3>
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Emotions</th><th>Moods</th></tr>
+        <tr><td>Cause</td><td>Specific, identifiable event</td><td>General; cause often unclear</td></tr>
+        <tr><td>Duration</td><td>Very brief (seconds to minutes)</td><td>Longer lasting (hours to days)</td></tr>
+        <tr><td>Nature</td><td>Specific (anger, fear, joy)</td><td>General (positive/negative affect)</td></tr>
+        <tr><td>Physical Expression</td><td>Accompanied by facial expressions</td><td>More cognitive, less visible</td></tr>
+        <tr><td>Action</td><td>Action-oriented (fight or flight)</td><td>Influences general behavior and perception</td></tr>
+      </table>
+      <div class="example"><em>Emotion:</em> You receive sudden negative feedback in a meeting → you feel immediate anger (specific trigger, strong reaction).<br><em>Mood:</em> You wake up feeling "off" with no particular reason and spend the day interpreting everything negatively.</div>
+
+      <h3>Emotional Intelligence (EI) — All 4 Components</h3>
+      <p>EI is the <strong>ability to detect and manage emotional cues and information</strong>. High EI strongly predicts job performance and leadership effectiveness.</p>
+
+      <div class="def-box">
+        <div class="def-term">1. Self-Awareness</div>
+        <p>Recognizing your <strong>own emotions</strong> as they happen. Understanding how your feelings affect your thoughts and behavior.</p>
+      </div>
+      <div class="example">A team lead notices they are feeling frustrated before entering a code review session and consciously chooses to take a 5-minute walk first to reset.</div>
+
+      <div class="def-box">
+        <div class="def-term">2. Self-Management (Self-Regulation)</div>
+        <p>Controlling <strong>impulsive feelings and behaviors</strong>. Managing emotions in healthy ways. Staying calm under pressure.</p>
+      </div>
+      <div class="example">When a client unreasonably blames the dev team during a call, the project manager resists snapping back, takes a breath, and calmly redirects to problem-solving.</div>
+
+      <div class="def-box">
+        <div class="def-term">3. Social Awareness (Empathy)</div>
+        <p>Understanding <strong>other people's emotions</strong>. Reading the room. Detecting emotional undercurrents in a team.</p>
+      </div>
+      <div class="example">A Scrum Master notices during standup that a developer seems withdrawn and stressed, then checks in privately — discovering a personal crisis that was affecting productivity.</div>
+
+      <div class="def-box">
+        <div class="def-term">4. Relationship Management</div>
+        <p>Using emotional awareness to <strong>manage interactions successfully</strong>. Inspiring others, resolving conflicts, and building strong relationships.</p>
+      </div>
+      <div class="example">A tech lead navigates a conflict between two senior developers about system architecture by acknowledging both perspectives, finding common ground, and building consensus without damaging either relationship.</div>
+
+      <h3>Emotional Labor</h3>
+      <div class="def-box">
+        <div class="def-term">Emotional Labor</div>
+        <p>An employee's expression of <strong>organizationally desired emotions</strong> during work interactions, regardless of actual feelings.</p>
+      </div>
+      <table class="compare-table">
+        <tr><th>Type</th><th>Meaning</th><th>Effect</th></tr>
+        <tr><td><strong>Surface Acting</strong></td><td>Faking the required emotion (displaying it without feeling it)</td><td>Leads to burnout and emotional exhaustion</td></tr>
+        <tr><td><strong>Deep Acting</strong></td><td>Actually changing internal feelings to match the required emotion</td><td>More authentic but mentally taxing</td></tr>
+      </table>
+      <div class="example">A call center agent who just received bad personal news must still answer calls cheerfully. Surface acting = forcing a smile while still feeling sad. Deep acting = trying to genuinely shift focus to helping the customer.</div>
+
+      <h3>Why EI Matters in the Workplace</h3>
+      <ul>
+        <li><strong>Selection:</strong> High EI employees are better in social, collaborative, and customer-facing jobs.</li>
+        <li><strong>Leadership:</strong> Leaders with high EI create more positive team climates and are more persuasive.</li>
+        <li><strong>Decision Making:</strong> Positive emotions lead to broader, more creative thinking.</li>
+        <li><strong>Negotiation:</strong> Emotionally skilled people read the other party better and achieve more favorable outcomes.</li>
+        <li><strong>Customer Service:</strong> Emotions are contagious — an employee's mood directly affects customer experience.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 5: GROUPS VS TEAMS -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">5</div>
+      <div class="section-title">Groups vs. Teams & Group Development</div>
+      <div class="section-stars">⭐⭐⭐ Every Year</div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="section-body">
+      <h3>Work Groups vs. Work Teams</h3>
+      <table class="compare-table">
+        <tr><th>Dimension</th><th>Work Group</th><th>Work Team</th></tr>
+        <tr><td>Primary Goal</td><td>Share information</td><td>Collective performance</td></tr>
+        <tr><td>Synergy</td><td>Neutral or negative</td><td>Positive (1+1 &gt; 2)</td></tr>
+        <tr><td>Accountability</td><td>Individual only</td><td>Individual AND Mutual</td></tr>
+        <tr><td>Skills</td><td>Random and varied</td><td>Complementary</td></tr>
+        <tr><td>Interdependence</td><td>Low — members work relatively independently</td><td>High — tasks are interconnected</td></tr>
+        <tr><td>Leadership</td><td>Single leader assigns tasks</td><td>Shared leadership; leadership can shift</td></tr>
+        <tr><td>Outcome</td><td>Sum of individual outputs</td><td>Greater than sum of individual outputs</td></tr>
+      </table>
+      <div class="example"><em>Work Group:</em> Each developer in a department works on their own module with minimal interaction. They share updates in a weekly meeting.<br><em>Work Team:</em> A cross-functional sprint team (frontend dev, backend dev, QA, designer) who jointly plan, review, and ship features together — they succeed or fail as one unit.</div>
+
+      <h3>Tuckman's 5-Stage Group Development Model</h3>
+      <div class="tip">Every single past paper from 2022–2024 included this. Memorize stage names AND characteristics.</div>
+      <ol class="stages">
+        <li>
+          <div><span class="stage-name">Forming</span><br>Members feel significant <strong>uncertainty</strong> about the group's purpose, structure, and leadership. Everyone is polite and getting to know each other. Little real work is done. The group is just coming together.</div>
+        </li>
+        <li>
+          <div><span class="stage-name">Storming</span><br><strong>Intragroup conflict</strong> emerges. Members accept the group exists but resist the constraints it imposes. Conflicts arise about roles, leadership, and working methods. This is the most uncomfortable but necessary stage.</div>
+        </li>
+        <li>
+          <div><span class="stage-name">Norming</span><br>Close relationships develop. <strong>Cohesiveness grows</strong>. Shared norms of behavior are established. Members understand their roles. Conflict is replaced by collaboration.</div>
+        </li>
+        <li>
+          <div><span class="stage-name">Performing</span><br>The group is <strong>fully functional</strong>. Energy shifts from getting to know each other to performing the task. High productivity, autonomy, and mutual support. Not all groups reach this stage.</div>
+        </li>
+        <li>
+          <div><span class="stage-name">Adjourning</span><br>For <strong>temporary groups</strong>: wrapping up activities and preparing for disbandment. Members may feel a sense of loss. Focus is on closure, not performance.</div>
+        </li>
+      </ol>
+      <div class="example">A final-year student project team: First week = polite introductions (Forming). Week 2 = argument about who leads and which tech stack to use (Storming). Week 3 = roles agreed, work rhythm established (Norming). Weeks 4–7 = productive sprints with high output (Performing). Final week = wrapping up, handing over repository (Adjourning).</div>
+
+      <h3>Types of Teams</h3>
+      <table class="compare-table">
+        <tr><th>Type</th><th>Key Feature</th><th>Example</th></tr>
+        <tr><td><strong>Problem-Solving</strong></td><td>5–12 members, same dept, discuss quality/efficiency — rarely have authority to implement</td><td>IT team meeting to discuss server downtime reduction strategies</td></tr>
+        <tr><td><strong>Self-Managed</strong></td><td>10–15 members, take on supervisory responsibilities (scheduling, hiring, evaluation)</td><td>A DevOps squad that manages its own sprints, hiring, and tools</td></tr>
+        <tr><td><strong>Cross-Functional</strong></td><td>Employees from different work areas at same level — common for complex projects</td><td>A product launch team with Marketing, Engineering, Finance, and Design</td></tr>
+        <tr><td><strong>Virtual</strong></td><td>Connected by technology, physically dispersed; needs trust and clear communication</td><td>A globally distributed open-source team collaborating via GitHub and Slack</td></tr>
+      </table>
+
+      <h3>Team Effectiveness (3 Pillars)</h3>
+      <ul>
+        <li><strong>Context:</strong> Adequate resources, effective leadership, climate of trust, team-based rewards.</li>
+        <li><strong>Composition:</strong> Right abilities (technical + interpersonal), Conscientiousness/Openness personality traits, optimal size (5–9 members), members who want to be on a team.</li>
+        <li><strong>Process:</strong> Common purpose, specific measurable goals, team efficacy (belief they can succeed), managed conflict, minimized social loafing.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 6: COMMUNICATION -->
+  <div class="section">
+    <div class="section-header" onclick="toggleSection(this)">
+      <div class="section-number">6</div>
+      <div class="section-title">Communication Barriers</div>
+      <div class="section-stars">⭐⭐ High Frequency</div>
+      <div class="chevron">▶</div>
+    </div>
+    <div class="section-body">
+      <h3>Communication Process</h3>
+      <p>Sender → Encoding → Message → Channel → Decoding → Receiver | with Noise and Feedback loops throughout.</p>
+
+      <h3>Directions of Communication</h3>
+      <table class="compare-table">
+        <tr><th>Direction</th><th>Flow</th><th>Purpose</th><th>Example</th></tr>
+        <tr><td><strong>Downward</strong></td><td>High to Low</td><td>Assign goals, give instructions, explain policies</td><td>CEO emails team about new remote work policy</td></tr>
+        <tr><td><strong>Upward</strong></td><td>Low to High</td><td>Feedback, progress reports, raising concerns</td><td>Developer tells manager about a recurring bug in sprint review</td></tr>
+        <tr><td><strong>Lateral</strong></td><td>Same level</td><td>Coordination, sharing info between peers</td><td>Backend and frontend developer discuss API contract for a feature</td></tr>
+      </table>
+
+      <h3>The 6 Key Communication Barriers (All Required)</h3>
+
+      <div class="def-box">
+        <div class="def-term">1. Filtering</div>
+        <p>A sender <strong>manipulates information</strong> so the receiver will view it more favorably. Information is selectively passed upward to make things look better than they are.</p>
+      </div>
+      <div class="example">A project manager tells the CTO "We're 90% complete" when in reality there are critical unresolved bugs, just to avoid a difficult conversation.</div>
+
+      <div class="def-box">
+        <div class="def-term">2. Selective Perception</div>
+        <p>People interpret messages through the <strong>lens of their own interests, background, and attitudes</strong>, hearing what they want to hear.</p>
+      </div>
+      <div class="example">When leadership announces a "company restructuring," an employee who is already anxious hears it as "we are laying people off" even though that was not stated.</div>
+
+      <div class="def-box">
+        <div class="def-term">3. Information Overload</div>
+        <p>Information inflow <strong>exceeds an individual's processing capacity</strong> — too many emails, messages, and reports to meaningfully absorb.</p>
+      </div>
+      <div class="example">A developer receives 150+ Slack messages, 40 emails, and 6 meeting invites in a single day. Critical bug reports get buried and missed.</div>
+
+      <div class="def-box">
+        <div class="def-term">4. Emotions</div>
+        <p>How a receiver <strong>feels at the time a message is received</strong> influences how they interpret it. Angry or upset receivers distort meaning.</p>
+      </div>
+      <div class="example">A manager delivers constructive code review feedback. The developer, already frustrated from a long day, receives it as harsh personal criticism, not helpful guidance.</div>
+
+      <div class="def-box">
+        <div class="def-term">5. Language</div>
+        <p>Words have <strong>different meanings to different people</strong>. Jargon, ambiguous terms, or cultural differences cause misunderstandings.</p>
+      </div>
+      <div class="example">A business analyst emails developers asking for a "quick fix." The developers interpret this as a few minutes of work. The analyst expected a complete refactor. Both understood "quick fix" differently.</div>
+
+      <div class="def-box">
+        <div class="def-term">6. Silence</div>
+        <p>An <strong>absence of information</strong> due to employees' fear of being belittled, ignored, or penalized for voicing concerns or divergent opinions.</p>
+      </div>
+      <div class="example">Junior developers notice a critical architectural flaw in the system but stay silent because the senior architect seems defensive. The flaw later causes a major production outage.</div>
+
+      <h3>How to Overcome Communication Barriers</h3>
+      <ul>
+        <li>Use <strong>simple, clear language</strong> — avoid jargon where possible.</li>
+        <li>Practice <strong>active listening</strong> — confirm understanding through paraphrasing.</li>
+        <li>Choose the <strong>right channel</strong> — rich channels (face-to-face) for complex/emotional messages; lean channels (email) for simple information.</li>
+        <li>Create a <strong>psychologically safe environment</strong> — where employees feel safe raising concerns without fear.</li>
+        <li>Use <strong>feedback loops</strong> — confirm receipt and understanding of important messages.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end tab-notes -->
+
+<!-- ===================== MODEL PAPER TAB ===================== -->
+<div id="tab-paper" class="tab-panel">
+
+  <div class="paper-header">
+    <h2>University of Colombo School of Computing</h2>
+    <p>Department of Information Systems</p>
+    <hr class="divider">
+    <h2 style="color: var(--accent); font-size: 18px;">IS / Organizational Behavior</h2>
+    <p>Model Paper — Academic Year 2025/2026</p>
+    <div class="paper-meta">
+      <span><strong>Time Allowed:</strong> 2 Hours</span>
+      <span><strong>Total Marks:</strong> 100</span>
+      <span><strong>Examiner:</strong> Model Paper 2026</span>
+    </div>
+  </div>
+
+  <div class="instructions">
+    <h4>📋 Instructions to Candidates</h4>
+    <ul>
+      <li>Answer <strong>ALL FOUR (4) questions.</strong></li>
+      <li>Each question carries <strong>25 marks.</strong></li>
+      <li>Read each scenario carefully before answering.</li>
+      <li>Support your answers with <strong>relevant examples from the IT industry.</strong></li>
+      <li>Where a UI or design is requested, provide a <strong>clearly labeled wireframe description</strong> or sketch with justification.</li>
+    </ul>
+  </div>
+
+  <!-- Q1 -->
+  <div class="question-block">
+    <div class="question-head">
+      <h3>Question 01 — Personality &amp; Diversity</h3>
+      <span class="q-marks">[25 marks]</span>
+    </div>
+    <div class="question-parts">
+      <div class="scenario">
+        <strong>📋 Scenario</strong>
+        TechNova Solutions is a fast-growing software company in Colombo that recently expanded its development team by hiring 15 new engineers. The HR manager has noticed significant differences in how team members approach their work — some are creative and embrace new technologies, while others prefer structured, predictable processes. A few team members avoid responsibility, while others consistently deliver beyond expectations. The HR manager wants to use a structured personality assessment to build better teams.
+      </div>
+      <div class="q-part">
+        <div class="q-label">(a)</div>
+        <div class="q-text">Define personality and explain the <strong>Big Five Personality Model (OCEAN)</strong>. For each trait, describe how it would manifest in a software engineer's workplace behavior at TechNova Solutions. <em>(Use all 5 traits.)</em></div>
+        <div class="q-marks-inline">[10]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(b)</div>
+        <div class="q-text">The HR manager wants to design a <strong>web-based personality assessment tool</strong> for new hires. Describe the functional design of this tool, including the steps to build it, the personality elements you would include, and justify why those elements are important for assessing IT industry candidates.</div>
+        <div class="q-marks-inline">[8]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(c)</div>
+        <div class="q-text">TechNova is also focused on building an <strong>inclusive and diverse workplace</strong>. Define workplace diversity and identify <strong>three (3) ways</strong> in which anti-discriminatory policies can influence employee behavior and organizational culture in an IT organization.</div>
+        <div class="q-marks-inline">[7]</div>
+      </div>
+    </div>
+    <button class="ans-toggle" onclick="toggleAnswer(this)">▶ &nbsp; Show Model Answer</button>
+    <div class="ans-body">
+      <div class="ans-part">
+        <div class="ans-label">(a) Big Five at TechNova [10 marks]</div>
+        <div class="ans-text">
+          <p><strong>Personality</strong> is the sum total of ways in which an individual consistently reacts and interacts with others.</p>
+          <ul>
+            <li><strong>Openness to Experience (High):</strong> An engineer who actively researches new frameworks, proposes architectural innovations, and is first to experiment with AI-assisted development tools. <em>(Low: sticks to familiar tech stack, resists adopting new libraries.)</em></li>
+            <li><strong>Conscientiousness (High):</strong> Submits code with comprehensive unit tests before every pull request, never misses sprint commitments, and documents everything meticulously. Strongest predictor of job performance. <em>(Low: frequently misses deadlines, skips documentation.)</em></li>
+            <li><strong>Extraversion (High):</strong> Actively speaks up in architecture meetings, builds rapport with clients during demos, and naturally emerges as team representative. <em>(Low: prefers async communication, works best independently.)</em></li>
+            <li><strong>Agreeableness (High):</strong> Accepts code review feedback constructively, helps struggling teammates, and avoids blame during incidents. <em>(Low: conflicts with teammates, refuses to compromise on design decisions.)</em></li>
+            <li><strong>Emotional Stability (High):</strong> Stays calm and solution-focused during production outages or difficult stakeholder calls, doesn't panic under pressure. <em>(Low: becomes stressed and makes hasty decisions during incidents.)</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(b) Personality Assessment Tool Design [8 marks]</div>
+        <div class="ans-text">
+          <ol>
+            <li><strong>Define Objective:</strong> Assess Conscientiousness and Openness for technical roles; Agreeableness and Extraversion for team-lead or client-facing roles.</li>
+            <li><strong>Design Questionnaire:</strong> Create 5-point Likert-scale statements per dimension. E.g., "I always meet project deadlines even under pressure" → Conscientiousness. "I enjoy learning about new programming paradigms" → Openness.</li>
+            <li><strong>Input Validation:</strong> Ensure all 30+ questions are answered before submission. Include reverse-scored items to detect response biases.</li>
+            <li><strong>Scoring Engine:</strong> Average scores per dimension → normalize to a 100-point scale per trait.</li>
+            <li><strong>Output Dashboard:</strong> Display a radar/spider chart of all 5 dimensions with role-fit recommendations.</li>
+            <li><strong>HR Review:</strong> Allow HR to compare candidate profiles against benchmark profiles for specific roles.</li>
+          </ol>
+          <p><strong>Justification:</strong> Conscientiousness predicts performance across all IT roles. Openness predicts innovation ability crucial in tech. Agreeableness predicts team cohesion — vital in Agile environments.</p>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(c) Diversity & Anti-Discrimination [7 marks]</div>
+        <div class="ans-text">
+          <p><strong>Workplace Diversity</strong> refers to the presence of differences among people in an organization, including surface-level characteristics (age, gender, ethnicity) and deep-level characteristics (values, personality, work preferences).</p>
+          <p><strong>Three ways anti-discriminatory policies influence behavior and culture:</strong></p>
+          <ol>
+            <li><strong>Equal Opportunity in Hiring:</strong> Ensures talent is selected on merit alone → attracts a wider, more skilled talent pool and signals fairness to all employees, building trust in the organization.</li>
+            <li><strong>Psychological Safety:</strong> Policies against harassment and bias create an environment where diverse employees can voice ideas freely → increases innovation and reduces turnover among minority groups.</li>
+            <li><strong>Cultural Sensitivity Training:</strong> Reduces stereotyping and unconscious bias among team members → improves collaboration across backgrounds, especially important in global IT projects with multicultural teams.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="question-block">
+    <div class="question-head">
+      <h3>Question 02 — Perception, Attribution &amp; Communication</h3>
+      <span class="q-marks">[25 marks]</span>
+    </div>
+    <div class="question-parts">
+      <div class="scenario">
+        <strong>📋 Scenario</strong>
+        At DataBridge IT, a performance review cycle has just ended. Several team members are unhappy. Nimal, a senior developer, received a poor review despite having delivered all his features on time — his manager rated him low because Nimal was quiet during meetings. Priya, a junior developer, received an outstanding review after impressing the CTO in a single product demo. Meanwhile, the team is experiencing communication breakdowns: developers are not getting clear requirements, and key decisions made in Slack messages are being missed or misunderstood.
+      </div>
+      <div class="q-part">
+        <div class="q-label">(a)</div>
+        <div class="q-text">Identify and explain <strong>three (3) perceptual errors</strong> that appear in the DataBridge scenario above. For each, name the shortcut, define it, and connect it specifically to the scenario.</div>
+        <div class="q-marks-inline">[9]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(b)</div>
+        <div class="q-text">Using <strong>Attribution Theory</strong>, analyze Nimal's poor performance rating. Apply all three determinants (Distinctiveness, Consensus, Consistency) to the situation and determine whether the cause should be attributed as internal or external. Discuss how this attribution error affects the team.</div>
+        <div class="q-marks-inline">[8]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(c)</div>
+        <div class="q-text">List and explain <strong>four (4) barriers to effective communication</strong> that may be contributing to DataBridge's issues. Provide an organizational example from the scenario or a similar IT context for each barrier.</div>
+        <div class="q-marks-inline">[8]</div>
+      </div>
+    </div>
+    <button class="ans-toggle" onclick="toggleAnswer(this)">▶ &nbsp; Show Model Answer</button>
+    <div class="ans-body">
+      <div class="ans-part">
+        <div class="ans-label">(a) Three Perceptual Errors [9 marks — 3 each]</div>
+        <div class="ans-text">
+          <ol>
+            <li><strong>Stereotyping:</strong> Judging Nimal as a poor performer because he is quiet in meetings, assuming that introverted behavior = low contribution. This is a group-based judgment (introverts are less capable) rather than an assessment of his actual output.</li>
+            <li><strong>Halo Effect:</strong> Priya impressed the CTO in one product demo, causing the manager to form a globally positive impression of her across all dimensions (technical depth, teamwork, reliability) based on a single standout moment.</li>
+            <li><strong>Recency Effect:</strong> The manager's final evaluation is heavily influenced by the most recent events (the demo, the quiet period) rather than the complete record of performance across the entire review period.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(b) Attribution Theory — Nimal's Case [8 marks]</div>
+        <div class="ans-text">
+          <ul>
+            <li><strong>Distinctiveness:</strong> If Nimal performs well in all other areas (delivers features, writes good code) but is only quiet in meetings → HIGH Distinctiveness → points to External cause (meeting format, culture).</li>
+            <li><strong>Consensus:</strong> If multiple engineers from similar backgrounds are also quieter in meetings → HIGH Consensus → points to External cause (team culture, meeting structure discourages participation).</li>
+            <li><strong>Consistency:</strong> If Nimal has always been quieter in meetings but consistently delivers high-quality work → LOW Consistency with "poor performance" → further supports External attribution.</li>
+          </ul>
+          <p><strong>Conclusion:</strong> Attribution analysis suggests Nimal's quiet meetings behavior is externally caused (introverted personality + meeting format not suited to his style). The manager committed a <em>Fundamental Attribution Error</em> — blaming Nimal's character (internal) rather than the situation (external: meeting format not inclusive of introverts).</p>
+          <p><strong>Team Impact:</strong> Unfair ratings erode trust, damage morale of high-performing introverts, cause talented developers to disengage or leave, and signal to the team that visibility matters more than output — creating a toxic culture of performance theater over actual work.</p>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(c) Four Communication Barriers [8 marks — 2 each]</div>
+        <div class="ans-text">
+          <ol>
+            <li><strong>Information Overload:</strong> Decisions buried in long Slack threads — developers simply miss important requirements because message volume exceeds their processing capacity.</li>
+            <li><strong>Language:</strong> Vague requirements like "make it faster" or "improve UX" mean different things to developers and stakeholders → implementations don't meet expectations.</li>
+            <li><strong>Filtering:</strong> Team leads summarize problems upward optimistically → management makes decisions on incomplete or overly positive information.</li>
+            <li><strong>Silence:</strong> Junior developers notice unclear requirements but fear being seen as incompetent if they ask for clarification → proceed with wrong assumptions → wasted sprint effort.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="question-block">
+    <div class="question-head">
+      <h3>Question 03 — Motivation</h3>
+      <span class="q-marks">[25 marks]</span>
+    </div>
+    <div class="question-parts">
+      <div class="scenario">
+        <strong>📋 Scenario</strong>
+        CloudBridge Systems is a software outsourcing company. Despite offering one of the best salary packages in the market, the company is facing a 40% annual employee turnover rate among its developers. Exit interviews reveal that developers feel their work is repetitive, they rarely receive feedback, there is no clear career progression, and they feel "like a cog in a machine." Management is confused — they believe high salaries should be sufficient to keep employees happy and productive. Meanwhile, two developers, Amara and Dilshan, have noticed they do the same volume of work but Dilshan earns 30% more, causing Amara to significantly reduce her effort.
+      </div>
+      <div class="q-part">
+        <div class="q-label">(a)</div>
+        <div class="q-text">Using <strong>Herzberg's Two-Factor Theory</strong>, explain why CloudBridge Systems is experiencing high turnover despite high salaries. Clearly identify and explain the <strong>hygiene factors</strong> and <strong>motivators</strong> at play in this scenario. Suggest <strong>four (4) specific actions</strong> the company should take.</div>
+        <div class="q-marks-inline">[10]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(b)</div>
+        <div class="q-text">Using <strong>Adams' Equity Theory</strong>, analyze Amara's reaction to discovering the pay disparity with Dilshan. Explain the concept of perceived inequity, identify <strong>three (3) behavioral responses</strong> Amara may exhibit, and suggest strategies CloudBridge should implement to restore equity.</div>
+        <div class="q-marks-inline">[9]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(c)</div>
+        <div class="q-text">Based on Herzberg's model, identify <strong>five (5) key factors</strong> that modern tech companies should focus on to retain the new generation of employees (Gen-Z and Millennials). Justify each factor.</div>
+        <div class="q-marks-inline">[6]</div>
+      </div>
+    </div>
+    <button class="ans-toggle" onclick="toggleAnswer(this)">▶ &nbsp; Show Model Answer</button>
+    <div class="ans-body">
+      <div class="ans-part">
+        <div class="ans-label">(a) Herzberg Analysis + Actions [10 marks]</div>
+        <div class="ans-text">
+          <p><strong>Key Principle:</strong> Satisfaction and dissatisfaction are NOT opposites. Hygiene factors only prevent dissatisfaction; motivators create genuine satisfaction.</p>
+          <p><strong>Hygiene Factor (Present — preventing dissatisfaction but NOT motivating):</strong> High salary. Management wrongly believes this is sufficient for motivation. It is not — it just removes one source of dissatisfaction.</p>
+          <p><strong>Motivators (ABSENT — causing demotivation and turnover):</strong></p>
+          <ul>
+            <li>No feedback → developers don't know if their work is valued (Recognition absent)</li>
+            <li>Repetitive work → no sense of achievement (Work itself — boring)</li>
+            <li>No career path → no growth (Advancement/Growth absent)</li>
+            <li>Feeling like "a cog in a machine" → no ownership or responsibility</li>
+          </ul>
+          <p><strong>Four Actions:</strong></p>
+          <ol>
+            <li><strong>Introduce regular 1-on-1 feedback sessions</strong> and public recognition channels (e.g., #kudos Slack channel) — addresses Recognition.</li>
+            <li><strong>Create clear technical career ladders</strong> (Junior → Mid → Senior → Principal) with transparent promotion criteria — addresses Advancement.</li>
+            <li><strong>Enable project ownership</strong> — assign developers ownership of a component or feature — addresses Responsibility.</li>
+            <li><strong>Introduce challenging, varied assignments</strong> and innovation time (e.g., 20% time for personal projects) — addresses Work Itself and Growth.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(b) Equity Theory — Amara & Dilshan [9 marks]</div>
+        <div class="ans-text">
+          <p><strong>Equity Theory:</strong> Employees compare their Outcome/Input ratio to relevant others. Amara compares: (Her salary / Her work) vs. (Dilshan's salary / Dilshan's work). She perceives her ratio as lower → inequity → tension → behavioral change.</p>
+          <p><strong>Three behavioral responses Amara may exhibit:</strong></p>
+          <ol>
+            <li><strong>Reduce Inputs:</strong> Deliberately slow down her work, skip extra tasks, stop going above and beyond — "If I'm paid less, I'll do less."</li>
+            <li><strong>Seek More Outcomes:</strong> Formally request a salary review or demand better benefits to balance the ratio.</li>
+            <li><strong>Leave the Organization:</strong> If equity cannot be restored, she may actively seek employment elsewhere where her contribution is valued fairly.</li>
+          </ol>
+          <p><strong>Strategies to Restore Equity:</strong></p>
+          <ol>
+            <li><strong>Transparent salary bands</strong> — publish pay ranges for each role level so expectations are clear.</li>
+            <li><strong>Objective performance-based pay adjustments</strong> — tie compensation changes to measurable metrics, not subjective favoritism.</li>
+            <li><strong>Immediate HR intervention</strong> — acknowledge Amara's concern, investigate the disparity, and take corrective action quickly to prevent disengagement from spreading to other team members.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(c) Retaining New Generation Employees [6 marks]</div>
+        <div class="ans-text">
+          <ol>
+            <li><strong>Meaningful, Impactful Work (Work Itself):</strong> Gen-Z wants to work on things that matter — products with purpose drive intrinsic motivation.</li>
+            <li><strong>Continuous Learning & Growth (Personal Growth):</strong> Access to courses, certifications, conference tickets — they stay where they grow.</li>
+            <li><strong>Regular Recognition (Recognition):</strong> Frequent, specific praise (not just annual reviews) — they need to know their contributions are seen and valued.</li>
+            <li><strong>Autonomy & Ownership (Responsibility):</strong> Freedom to make decisions and own outcomes — micromanagement drives them out fast.</li>
+            <li><strong>Competitive & Fair Compensation (Hygiene — must not cause dissatisfaction):</strong> While not sufficient alone, below-market pay is an immediate reason to leave — hygiene factors must first be met before motivators take effect.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="question-block">
+    <div class="question-head">
+      <h3>Question 04 — Emotions, Groups &amp; Teams</h3>
+      <span class="q-marks">[25 marks]</span>
+    </div>
+    <div class="question-parts">
+      <div class="scenario">
+        <strong>📋 Scenario</strong>
+        A new Agile development team of 8 engineers has been formed at InnoTech Lanka to build a hospital management system. In the first week, the team barely communicates and no clear roles exist. By week three, two senior developers clash frequently about the system architecture. By week six, roles are clear and the team has an agreed-upon coding standard. By week ten, the team is delivering sprints with high quality and zero defects. The team's Tech Lead, Saman, is known for his ability to sense team tension before it becomes conflict, manages his reactions well under tight deadlines, and is highly trusted by the team.
+      </div>
+      <div class="q-part">
+        <div class="q-label">(a)</div>
+        <div class="q-text">Map the InnoTech team's progression to <strong>Tuckman's Five-Stage Group Development Model</strong>. For each stage you identify, describe what is happening at InnoTech and what the team or leader should do to help the team progress to the next stage.</div>
+        <div class="q-marks-inline">[10]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(b)</div>
+        <div class="q-text">Identify <strong>three (3) differences between Work Groups and Work Teams</strong>, and explain why InnoTech's Agile team qualifies as a <strong>Work Team</strong> rather than a Work Group.</div>
+        <div class="q-marks-inline">[6]</div>
+      </div>
+      <div class="q-part">
+        <div class="q-label">(c)</div>
+        <div class="q-text">Using the description of Saman's behavior, explain the <strong>four (4) components of Emotional Intelligence (EI)</strong> and discuss how a high EI Tech Lead like Saman contributes to team effectiveness and project success.</div>
+        <div class="q-marks-inline">[9]</div>
+      </div>
+    </div>
+    <button class="ans-toggle" onclick="toggleAnswer(this)">▶ &nbsp; Show Model Answer</button>
+    <div class="ans-body">
+      <div class="ans-part">
+        <div class="ans-label">(a) Tuckman's Model Applied to InnoTech [10 marks — 2 each]</div>
+        <div class="ans-text">
+          <ol>
+            <li><strong>Forming (Week 1):</strong> Team barely communicates; no clear roles. Uncertainty about purpose and structure. → Leader should set clear goals, introduce members formally, and establish initial norms and expectations.</li>
+            <li><strong>Storming (Week 3):</strong> Two seniors clash about architecture. Intragroup conflict over working methods and decision authority. → Leader should facilitate structured technical debates, mediate fairly, and ensure all voices are heard without letting personal conflict escalate.</li>
+            <li><strong>Norming (Week 6):</strong> Roles defined, coding standards agreed. Cohesiveness grows; shared identity forms. → Leader should reinforce norms positively, celebrate small wins, and build trust to sustain momentum into the performing stage.</li>
+            <li><strong>Performing (Week 10):</strong> High-quality sprints, zero defects. Fully functional team. → Leader should shift to facilitation mode — remove blockers, protect team focus, recognize achievements, and delegate more autonomy.</li>
+            <li><strong>Adjourning:</strong> Not yet reached — the project is still running. If the team disbands at project end, the leader should facilitate a proper retrospective, acknowledge contributions, and support knowledge transfer.</li>
+          </ol>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(b) Groups vs. Teams + InnoTech Classification [6 marks]</div>
+        <div class="ans-text">
+          <table style="width:100%; border-collapse:collapse; font-size:13px;">
+            <tr style="background:rgba(232,200,74,0.1);"><th style="padding:8px; border:1px solid #252a38; color:#e8c84a;">Dimension</th><th style="padding:8px; border:1px solid #252a38; color:#e8c84a;">Work Group</th><th style="padding:8px; border:1px solid #252a38; color:#e8c84a;">Work Team</th></tr>
+            <tr><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Goal</td><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Share information</td><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Collective performance</td></tr>
+            <tr><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Accountability</td><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Individual only</td><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Individual AND Mutual</td></tr>
+            <tr><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Synergy</td><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Neutral or negative</td><td style="padding:8px; border:1px solid #252a38; color:#8892a4;">Positive</td></tr>
+          </table>
+          <p style="margin-top:10px;"><strong>InnoTech = Work Team because:</strong> The 8 engineers work interdependently on the same product with shared sprint goals, mutual accountability (team review cycle), and complementary skills (frontend, backend, QA, architecture) — they generate positive synergy through coordinated effort, producing more than the sum of individual outputs.</p>
+        </div>
+      </div>
+      <div class="ans-part">
+        <div class="ans-label">(c) EI Components — Saman's Application [9 marks]</div>
+        <div class="ans-text">
+          <ol>
+            <li><strong>Self-Awareness:</strong> "Manages reactions well under tight deadlines" → Saman recognizes when he is stressed and ensures his stress doesn't negatively impact how he communicates with the team. He knows his emotional triggers.</li>
+            <li><strong>Self-Management:</strong> Even during critical deadline pressure, Saman controls impulsive reactions → doesn't snap at team members or make hasty technical decisions → the team remains calm because their leader stays calm.</li>
+            <li><strong>Social Awareness (Empathy):</strong> "Senses team tension before it becomes conflict" → Saman reads emotional undercurrents — noticing frustration, withdrawal, or passive aggression early enough to intervene before it damages team cohesion.</li>
+            <li><strong>Relationship Management:</strong> "Highly trusted by the team" → This trust is the result of Saman consistently using emotional intelligence to resolve conflicts fairly, give meaningful feedback, and support team members' growth — the hallmark of strong relationship management.</li>
+          </ol>
+          <p><strong>Contribution to Team Effectiveness:</strong> A high-EI leader like Saman reduces unnecessary interpersonal conflict, creates psychological safety where team members freely share problems, keeps morale high during stressful sprints, and builds the trust necessary for a team to reach the Performing stage — directly translating into zero-defect delivery and high team satisfaction.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end tab-paper -->
+
+<!-- ===================== QUICK REF TAB ===================== -->
+<div id="tab-quick" class="tab-panel">
+  <div style="background: rgba(232,200,74,0.06); border: 1px solid rgba(232,200,74,0.2); border-radius: 10px; padding: 16px; margin-bottom: 24px;">
+    <p style="color: var(--accent); font-weight: 600; margin: 0;">⚡ Last-Minute Review — Know these by heart before the exam.</p>
+  </div>
+  <div class="quick-grid">
+    <div class="quick-card">
+      <h4>Big Five (OCEAN)</h4>
+      <ul>
+        <li><strong>O</strong>penness → Creative, curious</li>
+        <li><strong>C</strong>onscientiousness → Reliable (best predictor)</li>
+        <li><strong>E</strong>xtraversion → Sociable, assertive</li>
+        <li><strong>A</strong>greeableness → Cooperative, trusting</li>
+        <li><strong>N</strong>euroticism → Calm = high stability</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Perceptual Shortcuts</h4>
+      <ul>
+        <li>Selective Perception</li>
+        <li>Halo Effect (single +ve trait)</li>
+        <li>Horn Effect (single -ve trait)</li>
+        <li>Contrast Effect (comparing to others)</li>
+        <li>Stereotyping (group judgment)</li>
+        <li>Recency Effect (latest info bias)</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Attribution Theory</h4>
+      <ul>
+        <li>Distinctiveness → High = External</li>
+        <li>Consensus → High = External</li>
+        <li>Consistency → High = Internal</li>
+        <li>Fund. Attr. Error = blame person not situation</li>
+        <li>Self-Serving Bias = success=me, fail=them</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Herzberg's Theory</h4>
+      <ul>
+        <li><strong>Hygiene</strong>: Salary, conditions, policies → prevent dissatisfaction only</li>
+        <li><strong>Motivators</strong>: Achievement, growth, recognition → create satisfaction</li>
+        <li>Key: Satisfaction ≠ ¬Dissatisfaction</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Equity Theory</h4>
+      <ul>
+        <li>My outcomes/inputs vs. others</li>
+        <li>Inequity → tension → action</li>
+        <li>Responses: reduce input, demand more, change referent, quit</li>
+        <li>Distributive / Procedural / Interactional justice</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Emotional Intelligence</h4>
+      <ul>
+        <li>Self-Awareness → know your emotions</li>
+        <li>Self-Management → control impulses</li>
+        <li>Social Awareness → empathy</li>
+        <li>Relationship Mgmt → handle interactions</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Tuckman's 5 Stages</h4>
+      <ul>
+        <li>1. Forming → uncertainty</li>
+        <li>2. Storming → conflict</li>
+        <li>3. Norming → cohesion</li>
+        <li>4. Performing → functional</li>
+        <li>5. Adjourning → wrap-up</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Communication Barriers</h4>
+      <ul>
+        <li>Filtering (sender manipulation)</li>
+        <li>Selective Perception</li>
+        <li>Information Overload</li>
+        <li>Emotions</li>
+        <li>Language</li>
+        <li>Silence (fear to speak)</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Groups vs. Teams</h4>
+      <ul>
+        <li>Group: share info, individual accountability, neutral synergy</li>
+        <li>Team: collective performance, mutual accountability, POSITIVE synergy</li>
+        <li>Team = complementary skills</li>
+      </ul>
+    </div>
+    <div class="quick-card">
+      <h4>Emotions vs. Moods</h4>
+      <ul>
+        <li>Emotion: specific trigger, brief, action-oriented</li>
+        <li>Mood: no clear cause, lasts longer, general affect</li>
+        <li>Surface acting = faking emotions → burnout</li>
+        <li>Deep acting = changing internal feelings</li>
+      </ul>
+    </div>
+  </div>
+</div><!-- end tab-quick -->
+
+</div><!-- end main -->
+
+<script>
+function showTab(name) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleSection(header) {
+  const body = header.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+}
+
+function toggleAnswer(btn) {
+  const body = btn.nextElementSibling;
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  btn.textContent = isOpen ? '▶   Show Model Answer' : '▼   Hide Model Answer';
+}
+
+// Open first section by default
+document.querySelectorAll('.section-header')[0].click();
+</script>
+</body>
+</html>
